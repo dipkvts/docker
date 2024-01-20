@@ -24,7 +24,7 @@ services:
       - /mnt/my-data-backup-ebs/mongo:/data/db
 
   studentstoreapp:
-    image: 8072388539/studentstore:v2.0
+    image: dipkvts/studentstore:v2.0
     # build: ./
     ports:
       - 8080:8080
