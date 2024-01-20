@@ -1,0 +1,44 @@
+version: "3"
+services:
+  mysql:
+    image: mysql
+    ports:
+      - 3306:3306
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      # - mysql_data:/var/lib/mysql
+      - /mnt/data-backup-ebs/mysql:/var/lib/mysql
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    container_name: mongo-container
+    environment:
+      MONGO_INITDB_USERNAME: admin
+      MONGO_INITDB_PASSWORD: testtesttest
+    volumes:
+      # - mongodb_data:/data/db
+      - /mnt/data-backup-ebs/mongo:/data/db
+
+  studentstoreapp:
+    image: 8072388539/studentstore:v2.0
+    # build: ./
+    ports:
+      - 8080:8080
+    environment:
+      MONGODB_HOST: mongodb
+      MONGODB_PORT: 27017
+      MONGODB_DBNAME: studentdb
+      MONGODB_USERNAME: admin
+      MONGODB_PASSWORD: testtesttest
+    links:
+      - mongodb:mongg
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:
+  mysql_data:
