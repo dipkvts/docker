@@ -8,8 +8,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
-      # - mysql_data:/var/lib/mysql
-      - /mnt/data-backup-ebs/mysql:/var/lib/mysql
+      # - my-mysql-data:/var/lib/mysql
+      - /mnt/my-data-backup-ebs/mysql:/var/lib/mysql
 
   mongodb:
     image: mongo
@@ -20,8 +20,8 @@ services:
       MONGO_INITDB_USERNAME: admin
       MONGO_INITDB_PASSWORD: testtesttest
     volumes:
-      # - mongodb_data:/data/db
-      - /mnt/data-backup-ebs/mongo:/data/db
+      # - my-mongodb-data:/data/db
+      - /mnt/my-data-backup-ebs/mongo:/data/db
 
   studentstoreapp:
     image: 8072388539/studentstore:v2.0
@@ -40,5 +40,5 @@ services:
       - mongodb
 
 volumes:
-  mongodb_data:
-  mysql_data:
+  my-mongodb-data:
+  my-mysql-data:
